@@ -1,0 +1,30 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "config",
+      "Config": [
+        {
+          "Name": "config API",
+          "Version": "v1",
+          "Service": {
+            "Name": "config",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "user",
+      "Config": [
+        {
+          "Name": "user API",
+          "Version": "v1",
+          "Service": {
+            "Name": "user",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    }
+  ]
+}

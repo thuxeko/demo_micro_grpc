@@ -1,0 +1,30 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/v1/getallvip",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/GetAllVip",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "config"
+    },
+    {
+      "DownstreamPathTemplate": "/v1/getvipwithmoney/{money}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/GetVipWithMoney/{money}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "config"
+    }
+  ]
+}

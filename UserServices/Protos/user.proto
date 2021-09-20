@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option csharp_namespace = "UserServices.Protos";
+
+package user;
+
+service UserProtoServices {
+  rpc GetPaymentWithUser (GetPaymentWithUserRequest) returns (GetPaymentWithUserResponse) {
+    option (google.api.http) = {
+      get: "/v1/payment/{userid}"
+    };
+  }
+
+  rpc GetUserInfo (GetUserRequest) returns (UserModel) {
+    option (google.api.http) = {
+      get: "/v1/user/{userid}"
+    };
+  }
+
+  rpc AddPayment (AddPaymentRequest) returns (AddPaymentResponse);
+}
+
+message GetPaymentWithUserRequest {
+  int32 userid = 1;
+}
+
+message GetPaymentWithUserResponse {
+  repeated PaymentModel payment = 1;
+}
+
+message AddPaymentRequest {
+  PaymentModel payment = 1;
+}
+
+message AddPaymentResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetUserRequest {
+  int32 userid = 1;
+}
+
+message PaymentModel{
+	int32 user_id = 1;
+	int32 money = 2;
+	float time = 3;
+}
+
+message UserModel{
+	string name = 1;
+	string phonenumber = 2;
+	int32 total_pay = 3;
+	string vip_latest = 4;
+}

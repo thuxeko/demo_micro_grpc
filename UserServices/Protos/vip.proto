@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option csharp_namespace = "Config.Protos";
+
+service VipProtoServices {
+  rpc GetAllVip (GetAllVipRequest) returns (GetAllVipResponse){
+    option (google.api.http) = {
+      get: "/v1/getallvip"
+    };
+  }
+
+  rpc GetVipWithMoney (GetVipWithMoneyRequest) returns (VipModel){
+    option (google.api.http) = {
+      get: "/v1/getvipwithmoney/{money}"
+    };
+  }
+}
+
+message GetVipWithMoneyRequest {
+  int32 money = 1;
+}
+
+message GetAllVipRequest {
+}
+
+message GetAllVipResponse {
+	repeated VipModel vip = 1;
+}
+
+message VipModel{
+	int32 id = 1;
+	string vip_name = 2;
+	int32 require_vip = 3;
+}

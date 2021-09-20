@@ -1,0 +1,30 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/v1/payment/{userid}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/payment/{userid}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/v1/user/{userid}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/userinfo/{userid}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "user"
+    }
+  ]
+}

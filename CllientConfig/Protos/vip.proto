@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcVipClient";
+
+package vip;
+
+service VipProtoServices {
+  rpc GetVipWithMoney (GetVipWithMoneyRequest) returns (VipModel);
+}
+
+message GetVipWithMoneyRequest {
+  int32 money = 1;
+}
+
+message VipModel{
+	int32 id = 1;
+	string vip_name = 2;
+	int32 require_vip = 3;
+}
