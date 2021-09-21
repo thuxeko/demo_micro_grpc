@@ -6,6 +6,14 @@ package vip;
 
 service VipProtoServices {
   rpc GetVipWithMoney (GetVipWithMoneyRequest) returns (VipModel);
+  rpc GetAllVip (GetAllVipRequest) returns (GetAllVipResponse);
+}
+
+message GetAllVipRequest{
+}
+
+message GetAllVipResponse{
+	repeated VipModel vip = 1;
 }
 
 message GetVipWithMoneyRequest {

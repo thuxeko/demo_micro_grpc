@@ -28,7 +28,7 @@ namespace ConfigManagerServices.Services
         {
             try
             {
-                var vip_query = await _vip.Query().Where(x => x.RequireVip == request.Money).FirstOrDefaultAsync();
+                var vip_query = await _vip.Query().Where(x => x.RequireVip <= request.Money).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                 var vipModel = _mapper.Map<VipModel>(vip_query);
 
                 return vipModel;
@@ -37,8 +37,33 @@ namespace ConfigManagerServices.Services
             {
                 throw new RpcException(new Status(StatusCode.Unknown, e.Message));
             }
+        }
 
+        public override async Task<GetAllVipResponse> GetAllVip(GetAllVipRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var vip_query = await _vip.GetAll();
+                var vip_list = new List<VipModel>();
+                if (!vip_query.Any())
+                {
+                    throw new RpcException(new Status(StatusCode.NotFound, $"Khong tim thay ban ghi nao"));
+                }
 
+                foreach (var vip in vip_query)
+                {
+                    var vipModel = _mapper.Map<VipModel>(vip);
+                    vip_list.Add(vipModel);
+                }
+
+                GetAllVipResponse vip_response = new GetAllVipResponse();
+                vip_response.Vip.AddRange(vip_list);
+                return vip_response;
+            }
+            catch (Exception e)
+            {
+                throw new RpcException(new Status(StatusCode.Unknown, e.Message));
+            }
         }
     }
 }
