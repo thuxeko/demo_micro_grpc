@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserServices.Protos;
+using static Config.Protos.VipProtoServices;
 
 namespace UserServices.Services
 {
@@ -20,13 +21,15 @@ namespace UserServices.Services
         private readonly IMapper _mapper;
         private readonly IRepository<Payment> _payment;
         private readonly IRepository<User> _user;
+        private readonly VipProtoServicesClient _vipProtoServicesClient;
 
-        public UserService(ILogger<UserService> logger, IMapper mapper, IRepository<Payment> payment, IRepository<User> user)
+        public UserService(ILogger<UserService> logger, IMapper mapper, IRepository<Payment> payment, IRepository<User> user, VipProtoServicesClient vipProtoServicesClient)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _payment = payment;
             _user = user;
+            _vipProtoServicesClient = vipProtoServicesClient;
         }
 
         public override async Task<GetPaymentWithUserResponse> GetPaymentWithUser(GetPaymentWithUserRequest request, ServerCallContext context)
@@ -78,10 +81,7 @@ namespace UserServices.Services
                     throw new RpcException(new Status(StatusCode.NotFound, $"Khong tim thay ban ghi nao"));
                 }
 
-                using var channel = GrpcChannel.ForAddress("https://localhost:5003");
-                var client = new VipProtoServices.VipProtoServicesClient(channel);
-
-                var vip_with_money = await client.GetVipWithMoneyAsync(new GetVipWithMoneyRequest { Money = userInfo.TotalPay });
+                var vip_with_money = await _vipProtoServicesClient.GetVipWithMoneyAsync(new GetVipWithMoneyRequest { Money = userInfo.TotalPay });
                 if (vip_with_money == null)
                 {
                     throw new RpcException(new Status(StatusCode.NotFound, $"Khong tim thay ban ghi nao"));
@@ -94,6 +94,31 @@ namespace UserServices.Services
             catch (Exception e)
             {
                 throw new RpcException(new Status(StatusCode.Unknown, e.Message));
+            }
+        }
+
+        public override async Task<AddPaymentResponse> AddPayment(AddPaymentRequest request, ServerCallContext context)
+        {
+            try
+            {
+
+                var paymentModel = _mapper.Map<Payment>(request.Payment);
+
+                await _payment.Insert(paymentModel);
+                
+                return new AddPaymentResponse()
+                {
+                    Success = true,
+                    Message = "Them thanh cong"
+                };
+            }
+            catch (Exception e)
+            {
+                return new AddPaymentResponse()
+                {
+                    Success = false,
+                    Message = e.Message
+                };
             }
         }
     }

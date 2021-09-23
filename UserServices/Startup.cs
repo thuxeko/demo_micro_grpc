@@ -8,6 +8,7 @@ using UserServices.Mapper;
 using Microsoft.Extensions.Configuration;
 using EntityBusiness.Models;
 using System;
+using static Config.Protos.VipProtoServices;
 
 namespace UserServices
 {
@@ -25,6 +26,7 @@ namespace UserServices
             services.AddAutoMapper(typeof(MapperProfile).Assembly);
             services.AddGrpc();
             services.AddGrpcHttpApi();
+            services.AddGrpcClient<VipProtoServicesClient>(x => x.Address = new Uri(Configuration["GrpcClient:ConfigUrl"]));
 
             services.AddSwaggerGen(c =>
             {

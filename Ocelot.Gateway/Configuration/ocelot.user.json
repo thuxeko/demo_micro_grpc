@@ -25,6 +25,19 @@
       "UpstreamPathTemplate": "/userinfo/{userid}",
       "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/v1/addPayment",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/AddPayment",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "user"
     }
   ]
 }

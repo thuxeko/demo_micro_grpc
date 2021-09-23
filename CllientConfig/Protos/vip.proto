@@ -7,6 +7,9 @@ package vip;
 service VipProtoServices {
   rpc GetVipWithMoney (GetVipWithMoneyRequest) returns (VipModel);
   rpc GetAllVip (GetAllVipRequest) returns (GetAllVipResponse);
+  rpc InsertVip (InsertVipRequest) returns (CRUDVipResponse);
+  rpc UpdateVip (UpdateVipRequest) returns (CRUDVipResponse);
+
 }
 
 message GetAllVipRequest{
@@ -18,6 +21,19 @@ message GetAllVipResponse{
 
 message GetVipWithMoneyRequest {
   int32 money = 1;
+}
+
+message InsertVipRequest {
+	VipModel vip = 1;
+}
+
+message UpdateVipRequest {
+	VipModel vip = 1;
+}
+
+message CRUDVipResponse {
+	bool success = 1;
+	string mes = 2;
 }
 
 message VipModel{

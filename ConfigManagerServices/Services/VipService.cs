@@ -65,5 +65,45 @@ namespace ConfigManagerServices.Services
                 throw new RpcException(new Status(StatusCode.Unknown, e.Message));
             }
         }
+
+        public override async Task<CRUDVipResponse> InsertVip(InsertVipRequest request, ServerCallContext context)
+        {
+            var response = new CRUDVipResponse();
+            try
+            {
+                var vip_insert = _mapper.Map<VipConfig>(request.Vip);
+                await _vip.Insert(vip_insert);
+
+                response.Success = true;
+                response.Mes = "Them ban ghi thanh cong";
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Mes = e.Message;
+                return response;
+            }
+        }
+
+        public override async Task<CRUDVipResponse> UpdateVip(UpdateVipRequest request, ServerCallContext context)
+        {
+            var response = new CRUDVipResponse();
+            try
+            {
+                var vip_insert = _mapper.Map<VipConfig>(request.Vip);
+                await _vip.Update(vip_insert);
+
+                response.Success = true;
+                response.Mes = "Sua ban ghi thanh cong";
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Mes = e.Message;
+                return response;
+            }
+        }
     }
 }

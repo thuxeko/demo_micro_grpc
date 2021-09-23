@@ -19,7 +19,12 @@ service UserProtoServices {
     };
   }
 
-  rpc AddPayment (AddPaymentRequest) returns (AddPaymentResponse);
+  rpc AddPayment (AddPaymentRequest) returns (AddPaymentResponse){
+	option (google.api.http) = {
+      post: "/v1/addPayment",
+	  body: "*"
+    };
+  }
 }
 
 message GetPaymentWithUserRequest {
