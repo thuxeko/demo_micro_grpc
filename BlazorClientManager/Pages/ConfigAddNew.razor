@@ -1,0 +1,39 @@
+﻿@page  "/config/addnew"
+@using Microsoft.AspNetCore.SignalR.Client;
+@using Models
+@inject NavigationManager NavigationManager
+
+<h3>Add New Vip</h3>
+
+<EditForm Model="@vipModel" OnValidSubmit="@HandleValidSubmit">
+    <label>Vip name: </label>
+    <InputText id="vipName" @bind-Value="vipModel.VipName" />
+    <label>Required Vip: </label>
+    <InputNumber id="requiredVip" @bind-Value="vipModel.RequireVip" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private HubConnection _hubConnection;
+
+    public VipModel vipModel = new VipModel();
+
+    public async Task HandleValidSubmit()
+    {
+        await StartHubConnection();
+        await _hubConnection.SendAsync("InsertVip", vipModel);
+        NavigationManager.NavigateTo("/config");
+    }
+
+    private async Task StartHubConnection()
+    {
+        _hubConnection = new HubConnectionBuilder()
+                        .WithUrl("https://localhost:5031/VipHub")
+                        .Build();
+
+        await _hubConnection.StartAsync();
+        if (_hubConnection.State == HubConnectionState.Connected)
+            Console.WriteLine("connection started");
+    }
+}

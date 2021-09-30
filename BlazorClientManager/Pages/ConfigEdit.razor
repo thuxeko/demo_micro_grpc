@@ -1,0 +1,69 @@
+﻿@page "/editconfig"
+
+@using Microsoft.AspNetCore.SignalR.Client;
+@using Models
+@using Microsoft.AspNetCore.WebUtilities;
+@inject NavigationManager navigationManager
+
+<h3>Edit Vip</h3>
+
+<EditForm Model="@vipModel" OnValidSubmit="@HandleValidSubmit">
+    <label>Vip name: </label>
+    <InputText id="vipName" @bind-Value="vipModel.VipName" />
+    <label>Required Vip: </label>
+    <InputNumber id="requiredVip" @bind-Value="vipModel.RequireVip" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    int Id { get; set; }
+    private HubConnection _hubConnection;
+
+    public VipModel vipModel = new VipModel();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await StartHubConnection();
+        var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("Id", out var param))
+        {
+            Id = Convert.ToInt32(param.First());
+        }
+
+        _hubConnection.On<VipModel>("ReceiveObjectVip", (data) =>
+        {
+            vipModel = data;
+            StateHasChanged();
+        });
+
+        if (Id > 0)
+        {
+            await GetVip(Id);
+        }
+    }
+
+    private async Task GetVip(int id)
+    {
+        await _hubConnection.InvokeAsync("GetVipWithId", id);
+    }
+
+    public async Task HandleValidSubmit()
+    {
+        await StartHubConnection();
+        await _hubConnection.SendAsync("UpdateVip", vipModel);
+        navigationManager.NavigateTo("/config");
+    }
+
+    private async Task StartHubConnection()
+    {
+        _hubConnection = new HubConnectionBuilder()
+                        .WithUrl("https://localhost:5031/VipHub")
+                        .Build();
+
+        await _hubConnection.StartAsync();
+        if (_hubConnection.State == HubConnectionState.Connected)
+            Console.WriteLine("connection started");
+    }
+}

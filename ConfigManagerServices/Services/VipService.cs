@@ -105,5 +105,38 @@ namespace ConfigManagerServices.Services
                 return response;
             }
         }
+
+        public override async Task<CRUDVipResponse> DeleteVip(DeleteVipRequest request, ServerCallContext context)
+        {
+            var response = new CRUDVipResponse();
+            try
+            {
+                await _vip.Delete(request.Id);
+
+                response.Success = true;
+                response.Mes = "Xoa ban ghi thanh cong";
+                return response;
+            }
+            catch (Exception e)
+            {
+                response.Success = false;
+                response.Mes = e.Message;
+                return response;
+            }
+        }
+
+        public override async Task<VipModel> GetVipWithId(GetVipWithIdRequest request, ServerCallContext context)
+        {
+            try
+            {
+                var vipObject = await _vip.GetById(request.Id);
+                var vipResponse = _mapper.Map<VipModel>(vipObject);
+                return vipResponse;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

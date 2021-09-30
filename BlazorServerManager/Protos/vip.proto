@@ -1,14 +1,20 @@
 syntax = "proto3";
 
-option csharp_namespace = "ConfigManagerServices.Protos";
+option csharp_namespace = "BlazorVipService.Protos";
 
 package vip;
 
 service VipProtoServices {
   rpc GetVipWithMoney (GetVipWithMoneyRequest) returns (VipModel);
   rpc GetAllVip (GetAllVipRequest) returns (GetAllVipResponse);
+  rpc GetVipWithId (GetVipWithIdRequest) returns (VipModel);
   rpc InsertVip (InsertVipRequest) returns (CRUDVipResponse);
   rpc UpdateVip (UpdateVipRequest) returns (CRUDVipResponse);
+  rpc DeleteVip (DeleteVipRequest) returns (CRUDVipResponse);
+}
+
+message GetVipWithIdRequest{
+	int32 id = 1;
 }
 
 message GetAllVipRequest{
@@ -28,6 +34,10 @@ message InsertVipRequest {
 
 message UpdateVipRequest {
 	VipModel vip = 1;
+}
+
+message DeleteVipRequest{
+	int32 id = 1;
 }
 
 message CRUDVipResponse {

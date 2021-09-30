@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ocelot.Gateway", "Ocelot.Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Config", "Config\Config.csproj", "{2022FAA2-BCFC-45E4-9B34-0668679C52EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerManager", "BlazorServerManager\BlazorServerManager.csproj", "{139A0946-1D87-4434-AAE9-AA71F643073C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorServerManager", "BlazorServerManager\BlazorServerManager.csproj", "{139A0946-1D87-4434-AAE9-AA71F643073C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClientManager", "BlazorClientManager\BlazorClientManager.csproj", "{92FDE6F0-8922-497E-9503-31D9E2959E8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{139A0946-1D87-4434-AAE9-AA71F643073C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{139A0946-1D87-4434-AAE9-AA71F643073C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{139A0946-1D87-4434-AAE9-AA71F643073C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92FDE6F0-8922-497E-9503-31D9E2959E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92FDE6F0-8922-497E-9503-31D9E2959E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92FDE6F0-8922-497E-9503-31D9E2959E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92FDE6F0-8922-497E-9503-31D9E2959E8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +78,7 @@ Global
 		{FF84EAF0-9820-42EA-ADC4-2300AFC15B6C} = {775FEFA1-5891-4323-AAD5-5DA46FBBAE7E}
 		{03A355A0-0487-4C56-9314-A0D64D8E536A} = {775FEFA1-5891-4323-AAD5-5DA46FBBAE7E}
 		{139A0946-1D87-4434-AAE9-AA71F643073C} = {775FEFA1-5891-4323-AAD5-5DA46FBBAE7E}
+		{92FDE6F0-8922-497E-9503-31D9E2959E8F} = {775FEFA1-5891-4323-AAD5-5DA46FBBAE7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9AC57353-C4FB-430B-BABA-6225EAB7093D}

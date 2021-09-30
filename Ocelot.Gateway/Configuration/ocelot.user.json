@@ -2,7 +2,7 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/v1/payment/{userid}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -15,7 +15,7 @@
     },
     {
       "DownstreamPathTemplate": "/v1/user/{userid}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -28,7 +28,7 @@
     },
     {
       "DownstreamPathTemplate": "/v1/addPayment",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",

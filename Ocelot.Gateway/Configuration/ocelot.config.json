@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/v1/getallvip",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5004
+          "Port": 5003
         }
       ],
       "UpstreamPathTemplate": "/GetAllVip",
@@ -15,11 +15,11 @@
     },
     {
       "DownstreamPathTemplate": "/v1/getvipwithmoney/{money}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5004
+          "Port": 5003
         }
       ],
       "UpstreamPathTemplate": "/GetVipWithMoney/{money}",

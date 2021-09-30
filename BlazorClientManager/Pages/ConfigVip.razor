@@ -1,0 +1,27 @@
+﻿@page "/config"
+
+<h3>List Config</h3>
+<input type="button" value="Thêm mới" @onclick="()=>AddNew()" />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vip Name</th>
+            <th>Require Vip</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vip in lstVip)
+        {
+            <tr>
+                <td>@vip.Id</td>
+                <td>@vip.VipName</td>
+                <td>@vip.RequireVip</td>
+                <td><input type="button" value="Sửa" @onclick="()=> EditVip(vip.Id)"/></td>
+                <td><input type="button" value="Xóa" @onclick="()=> DeleteVip(vip.Id)" /></td>
+            </tr>
+        }
+    </tbody>
+</table>
